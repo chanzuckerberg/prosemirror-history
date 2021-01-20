@@ -323,7 +323,7 @@ function mapRanges(ranges, mapping) {
 // : (HistoryState, EditorState, (tr: Transaction), bool)
 // Apply the latest event from one branch to the document and shift the event
 // onto the other branch.
-function histTransaction(history, state, dispatch, redo) {
+export function histTransaction(history, state, dispatch, redo) {
   let preserveItems = mustPreserveItems(state), histOptions = historyKey.get(state).spec.config
   let pop = (redo ? history.undone : history.done).popEvent(state, preserveItems)
   if (!pop) return
@@ -362,7 +362,7 @@ export function closeHistory(tr) {
   return tr.setMeta(closeHistoryKey, true)
 }
 
-const historyKey = new PluginKey("history")
+export const historyKey = new PluginKey("history")
 const closeHistoryKey = new PluginKey("closeHistory")
 
 // :: (?Object) → Plugin
